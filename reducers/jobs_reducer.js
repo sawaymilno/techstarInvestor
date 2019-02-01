@@ -9,6 +9,8 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
+  console.log(action.type, 'action.type', state.city, 'city in jobs_reducer');
+  
   
   switch (action.type) {
     case CITY_CHANGED:
