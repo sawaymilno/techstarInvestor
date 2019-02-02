@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { View, Platform, Text } from 'react-native';
+// import axios from 'axios';
+import { View, Platform } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { MapView, Permissions } from 'expo';
+// import { MapView, Permissions } from 'expo';
 import { connect } from 'react-redux';
 
 import { Header, Card, CardSection, Input, Button, Spinner } from '../components/common';
@@ -40,16 +40,7 @@ class FormScreen extends Component {
     //   this.setState({ region });
     // }
     
-  onButtonPress = () => { 
-    let { city } = this.props; 
-    city = city.toLowerCase(); 
-    const filter = { city };
-    const navigate = this.props.navigation.navigate;
-    const companies = this.props.companies;
-    // this.props.buildCustomList(filter, companies, navigate);
-    this.props.buildCustomList(this.props);
-  }
-
+  onButtonPress = () => this.props.buildCustomList(this.props);
   onCityChange = (text) => this.props.cityChanged(text);
 
   // onPasswordChange = (text) => {
@@ -111,14 +102,14 @@ class FormScreen extends Component {
       }
     }
     
-const styles = {
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0
-  }
-};
+// const styles = {
+//   buttonContainer: {
+//     position: 'absolute',
+//     bottom: 20,
+//     left: 0,
+//     right: 0
+//   }
+// };
 
 const mapStateToProps = ({ form }) => {
   const { city, companies } = form;

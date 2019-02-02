@@ -45,6 +45,6 @@ const styles = {
     flex: 1,
     justifyContent: 'center'
   }
-}
+};
 
 export { Confirm };

@@ -48,7 +48,6 @@ class AuthScreen extends Component {
       </Button>
     );
   }
-
   
   render() {
     return (

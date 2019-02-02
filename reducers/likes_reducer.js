@@ -11,8 +11,6 @@ export default function (state = { results: [] }, action) {
     case CLEAR_LIKED_COMPANIES:
       return { ...state, results: [] };
     case LIKE_COMPANY:
-      // console.log('action.payload', action.payload);
-    
       return {
         ...state,
         results: [...state.results, action.payload]

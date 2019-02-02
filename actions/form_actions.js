@@ -1,11 +1,9 @@
-import firebase from 'firebase';
-import axios from 'axios';
+// import firebase from 'firebase';
+// import axios from 'axios';
 // import reverseGeocode from 'latlng-to-zip';
-import { Location } from 'expo';
-import qs from 'qs';
-
+// import { Location } from 'expo';
+// import qs from 'qs';
 import {
-  FETCH_JOBS,
   LIKE_COMPANY,
   CLEAR_LIKED_COMPANIES,
   FILTER_CITY,
@@ -16,18 +14,11 @@ import {
 export const cityChanged = (text) => ({ type: FILTER_CITY, payload: text });
 export const loadCompanyDatabase = (obj) => {
   console.log(obj, 'companydatabase in loadCompanyDatabase()');
-  
   return ({ type: LOGIN_LOAD_COMPANIES, payload: obj });
 };
 
-
 export const buildCustomList = (props) => {
-  // const { city } = filterObj;
-
-  console.log(props.city, props.companies, 'in buildCustomList city, companies');
-
   const results = props.companies.filter(company => company.location.city_name === props.city);
-  console.log(results, 'in buildCustomList results');
   props.navigation.navigate('deck');
   return ({ type: NEW_CUSTOM_LIST, payload: results });
 };

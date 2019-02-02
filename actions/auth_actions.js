@@ -7,7 +7,6 @@ import {
   LOGIN_USER,
 } from './types';
 
-
 export const emailChanged = (text) => ({ type: EMAIL_CHANGED, payload: text });
 export const passwordChanged = (text) => ({ type: PASSWORD_CHANGED, payload: text });
 
@@ -23,7 +22,8 @@ export const loginUser = ({ email, password }, callback) => {
   get();
   
   return (dispatch) => {
-    //dispatch is a 'redux-thunk' function to allow async calls
+    //dispatch is a 'redux-thunk' library that allows delivering 
+    //functions instead of just objects for the reducer
     dispatch({ type: LOGIN_USER });
 
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -44,12 +44,8 @@ export const loginUser = ({ email, password }, callback) => {
 };
 
 const loginUserFail = (dispatch) => dispatch({ type: LOGIN_USER_FAIL });
-const loginUserSuccess = (dispatch, user) => {
-  dispatch({
-    type: LOGIN_USER_SUCCESS,
-    payload: user
-  });
-};
+const loginUserSuccess = (dispatch, user) => dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+
 
 /**************************** OLD CODE ****************************/
 

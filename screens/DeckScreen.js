@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Platform, Linking, Image } from 'react-native';
+import { View, Text, Linking, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, Button, Icon } from 'react-native-elements';
 import Swipe from '../components/Swipe';
@@ -42,8 +42,7 @@ class DeckScreen extends Component {
   }
   
 
-  renderNoMoreCards = () => {
-    return (
+  renderNoMoreCards = () => (
       <Card title="No More Companies">
         <Button
           title="Back To form"
@@ -54,7 +53,7 @@ class DeckScreen extends Component {
         />
       </Card>
     );
-  }
+  
 
   render() {
     console.log(this.props, 'in DeckScreen this.props');

@@ -54,14 +54,6 @@ class Swipe extends Component {
     LayoutAnimation.spring();
   }
 
-  forceSwipe(direction) {
-    const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
-    Animated.timing(this.state.position, {
-      toValue: { x, y: 0 },
-      duration: SWIPE_OUT_DURATION
-    }).start(() => this.onSwipeComplete(direction));
-  }
-
   onSwipeComplete(direction) {
     const { onSwipeLeft, onSwipeRight, data } = this.props;
     const item = data[this.state.index];
@@ -69,12 +61,6 @@ class Swipe extends Component {
     direction === 'right' ? onSwipeRight(item) : onSwipeLeft(item);
     this.state.position.setValue({ x: 0, y: 0 });
     this.setState({ index: this.state.index + 1 });
-  }
-
-  resetPosition() {
-    Animated.spring(this.state.position, {
-      toValue: { x: 0, y: 0 }
-    }).start();
   }
 
   getCardStyle() {
@@ -88,6 +74,20 @@ class Swipe extends Component {
       ...position.getLayout(),
       transform: [{ rotate }]
     };
+  }
+
+  resetPosition() {
+    Animated.spring(this.state.position, {
+      toValue: { x: 0, y: 0 }
+    }).start();
+  }
+
+  forceSwipe(direction) {
+    const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
+    Animated.timing(this.state.position, {
+      toValue: { x, y: 0 },
+      duration: SWIPE_OUT_DURATION
+    }).start(() => this.onSwipeComplete(direction));
   }
 
   renderCards = () => {
