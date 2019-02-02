@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { View, Text, Platform, ScrollView, Linking, Button } from 'react-native';
+import { View, Text, Platform, ScrollView, Linking, Button, Image } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { MapView } from 'expo';
 
 class ReviewScreen extends Component {
   // static navigationOptions = {
@@ -28,28 +27,28 @@ class ReviewScreen extends Component {
   
 
   renderLikedJobs() {
-
-    // console.log(this.props.likedJobs.results, 'this.props.likedJobs.results');
-    
-    const newList = this.props.likedJobs.results.map(job => {
-      const { company, title, apply_url, id, post_date } = job;
+    const newList = this.props.results.map(item => {
+      const { name, status, logo_url, id, url } = item;
       
       return (
-        <Card title={title} key={id}>
-          <View style={{ height: 200 }}>
-            <MapView
-              style={{ flex: 1 }}
-              cacheEnabled={Platform.OS === 'android'}
-              scrollEnabled={false}
+        <Card title={name} key={id}>
+          <View style={{ height: 300 }}>
+          <View>
+            <Image
+            style={{ width: 175, height: 175 }}
+            // cacheEnabled={Platform.OS === 'android'}
+            source={{ uri: logo_url }}
+              // scrollEnabled={false}
             />
+          </View>
             <View style={styles.detailWrapper}>
-              <Text style={styles.italics}>{company.name}</Text>
-              <Text style={styles.italics}>{post_date}</Text>
+              <Text style={styles.italics}>{name}</Text>
+              <Text style={styles.italics}>{status}</Text>
             </View>
             <Button
-              title="Apply Now!"
+              title="Invest!"
               backgroundColor="#03A9F4"
-              onPress={() => Linking.openURL(apply_url)}
+              onPress={() => Linking.openURL(url)}
             />
           </View>
         </Card>
@@ -81,8 +80,9 @@ const styles = {
   }
 };
 
-function mapStateToProps(state) {
-  return { likedJobs: state.likedJobs };
+function mapStateToProps({ likedCompanies }) {
+  const { results } = likedCompanies;
+  return { results };
 }
 
 export default connect(mapStateToProps)(ReviewScreen);

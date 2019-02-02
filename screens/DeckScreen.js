@@ -1,43 +1,40 @@
 import React, { Component } from 'react';
-import { View, Text, Platform, Linking } from 'react-native';
+import { View, Text, Platform, Linking, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { MapView } from 'expo';
 import { Card, Button, Icon } from 'react-native-elements';
 import Swipe from '../components/Swipe';
 import * as actions from '../actions';
 
 class DeckScreen extends Component {
   static navigationOptions = {
-    title: 'Jobs',
+    title: 'Companies',
     tabBarIcon: ({ tintColor }) => <Icon name="description" size={30} color={tintColor} /> 
   }
 
-  renderCard(job) {
+  renderCard(company) {
     // const initialRegion = {
-    //   longitude: job.longitude,
-    //   latitude: job.latitude,
+    //   longitude: company.longitude,
+    //   latitude: company.latitude,
     //   latitudeDelta: 0.045,
     //   longitudeDelta: 0.02
     // };
     
     return (
-      <Card title={job.jobtitle}>
+      <Card title={company.name}>
         <View style={{ height: 300 }}>
-          <MapView
-            scrollEnabled={false}
-            style={{ flex: 1 }}
-            cacheEnabled={Platform.OS === 'android'}
-            // initialRegion={initialRegion}
+          <Image
+            style={{ width: 175, height: 175 }}
+            source={{ uri: company.logo_url }}
           />
           
         </View>
         <View style={{ height: 100 }}>
         <View style={styles.detailWrapper}>
-          <Text>Company Name: {job.company.name}</Text>
-          <Text>Job Title: {job.title}</Text>
+          <Text>Company Name: {company.name}</Text>
+          <Text>Company Status: {company.status}</Text>
         </View>
-        <Text style={styles.applyWrapper} onPress={() => Linking.openURL(job.apply_url)}>
-        Apply Here
+        <Text style={styles.applyWrapper} onPress={() => Linking.openURL(company.url)}>
+        Company Website
         </Text>
         </View>
       </Card>
@@ -47,7 +44,7 @@ class DeckScreen extends Component {
 
   renderNoMoreCards = () => {
     return (
-      <Card title="No More Jobs">
+      <Card title="No More Companies">
         <Button
           title="Back To form"
           large
@@ -60,14 +57,15 @@ class DeckScreen extends Component {
   }
 
   render() {
+    console.log(this.props, 'in DeckScreen this.props');
     return (
       <View style={{ marginTop: 25 }}>
         <Swipe
-          data={this.props.jobs}
+          data={this.props.newList}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
-          onSwipeRight={job => this.props.likeJob(job)}
-          // keyProp="jobkey"
+          onSwipeRight={company => this.props.likeCompany(company)}
+          keyProp="companykey"
         />
       </View>
     );
@@ -87,8 +85,9 @@ const styles = {
   }
 };
 
-function mapStateToProps({ jobs }) {
-  return { jobs: jobs.results };
+function mapStateToProps({ form }) {
+  const { newList } = form;
+  return { newList };
 }
 
 export default connect(mapStateToProps, actions)(DeckScreen);

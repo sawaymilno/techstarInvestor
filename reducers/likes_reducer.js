@@ -1,16 +1,16 @@
 import { REHYDRATE } from 'redux-persist';
 import {
-  LIKE_JOB,
-  CLEAR_LIKED_JOBS
+  LIKE_COMPANY,
+  CLEAR_LIKED_COMPANIES
 } from '../actions/types';
 
 export default function (state = { results: [] }, action) {
   switch (action.type) {
     case REHYDRATE:
-      return action.payload.likedJobs || [];
-    case CLEAR_LIKED_JOBS:
+      return action.payload.likedCompanies || [];
+    case CLEAR_LIKED_COMPANIES:
       return { ...state, results: [] };
-    case LIKE_JOB:
+    case LIKE_COMPANY:
       // console.log('action.payload', action.payload);
     
       return {

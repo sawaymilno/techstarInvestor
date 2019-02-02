@@ -1,6 +1,6 @@
 // import { Notifications } from 'expo';
 import React from 'react';
-import { StyleSheet, Alert } from 'react-native';
+// import { StyleSheet, Alert } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { 
   createBottomTabNavigator, 

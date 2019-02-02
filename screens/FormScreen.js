@@ -9,20 +9,20 @@ import { Header, Card, CardSection, Input, Button, Spinner } from '../components
 import * as actions from '../actions';
  
 class FormScreen extends Component {
-  // static navigationOptions = ({ navigation }) => ({
-  //   title: 'form',
-  //   tabBarIcon: ({ tintColor }) => <Icon name="my-location" size={30} color={tintColor} />, 
-  //   headerRight: 
-  //         <Button
-  //           title="Settings"
-  //           onPress={() => navigation.navigate('settings')}
-  //           backgroundColor="rgba(0,0,0,0)"
-  //           color="rgba(0, 122, 255, 1)"
-  //         />,
-  //       style: {
-  //         marginTop: Platform.OS === 'android' ? 24 : 0
-  //       } 
-  // });
+  static navigationOptions = ({ navigation }) => ({
+    title: 'form',
+    tabBarIcon: ({ tintColor }) => <Icon name="my-location" size={30} color={tintColor} />, 
+    headerRight: 
+          <Button
+            title="Settings"
+            onPress={() => navigation.navigate('settings')}
+            backgroundColor="rgba(0,0,0,0)"
+            color="rgba(0, 122, 255, 1)"
+          />,
+        style: {
+          marginTop: Platform.OS === 'android' ? 24 : 0
+        } 
+  });
 
   state = {
     region: {
@@ -32,27 +32,25 @@ class FormScreen extends Component {
       latitudeDelta: 0.09
     }
   }
- 
-  async componentDidMount() {
-    const { data } = await axios.get('https://data.techstars.com/v2/companies');
-    this.props.companiesChanged(data.items);
+  // async componentDidMount() {
       // await Permissions.askAsync(Permissions.LOCATION);
-  }
+  // }
   
   // onRegionChangeComplete = (region) => {
     //   this.setState({ region });
     // }
     
-    onButtonPress = () => {
-      console.log('this.props', this.props);  
-      let { city } = this.props; 
-      city = city.toLowerCase(); 
-    this.props.fetchCompanies(city, this.props.navigation.navigate);
+  onButtonPress = () => { 
+    let { city } = this.props; 
+    city = city.toLowerCase(); 
+    const filter = { city };
+    const navigate = this.props.navigation.navigate;
+    const companies = this.props.companies;
+    // this.props.buildCustomList(filter, companies, navigate);
+    this.props.buildCustomList(this.props);
   }
 
-  onCityChange = (text) => {
-    this.props.cityChanged(text);
-  }
+  onCityChange = (text) => this.props.cityChanged(text);
 
   // onPasswordChange = (text) => {
   //   this.props.passwordChanged(text);
@@ -60,7 +58,6 @@ class FormScreen extends Component {
 
 
   renderButton = () => {
-    
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
@@ -74,7 +71,6 @@ class FormScreen extends Component {
  
   render() {
         return (
-
           <View>
         <Header />
       <Card>
@@ -115,7 +111,6 @@ class FormScreen extends Component {
       }
     }
     
- 
 const styles = {
   buttonContainer: {
     position: 'absolute',
@@ -127,8 +122,6 @@ const styles = {
 
 const mapStateToProps = ({ form }) => {
   const { city, companies } = form;
-  // const { companies } = auth;
-console.log(companies, 'companies');
   return { city, companies };
 };
  

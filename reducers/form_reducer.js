@@ -1,14 +1,16 @@
 import {
   FETCH_JOBS,
   FILTER_CITY,
-  LOGIN_LOAD_COMPANIES
+  LOGIN_LOAD_COMPANIES,
+  NEW_CUSTOM_LIST
 } from '../actions/types';
 
 const INITIAL_STATE = {
   results: [],
   city: '',
   loading: false,
-  companies: {} 
+  companies: [],
+  newList: [] 
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -19,6 +21,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, results: action.payload };
     case LOGIN_LOAD_COMPANIES:
       return { ...state, companies: action.payload };
+    case NEW_CUSTOM_LIST:
+    return { ...state, newList: action.payload };
     default:
       return state;
   }

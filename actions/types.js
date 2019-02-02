@@ -1,10 +1,11 @@
 export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAIL = 'facebook_login_fail';
-export const FETCH_JOBS = 'fetch_jobs';
-export const LIKE_JOB = 'like_job';
-export const CLEAR_LIKED_JOBS = 'clear_liked_jobs';
+// export const FETCH_COMPANIESS = 'fetch_jobs';
+export const LIKE_COMPANY = 'like_company';
+export const CLEAR_LIKED_COMPANIES = 'clear_liked_companies';
 export const FILTER_CITY = 'filter_city';
 export const LOGIN_LOAD_COMPANIES = 'login_load_companies';
+export const NEW_CUSTOM_LIST = 'new_custom_list';
 
 export const EMAIL_CHANGED = 'email_changed';
 export const PASSWORD_CHANGED = 'password_changed';

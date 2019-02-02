@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import firebase from 'firebase';
+// import _ from 'lodash';
+// import firebase from 'firebase';
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
-import { AppLoading } from 'expo';
+// import { View, Text, AsyncStorage } from 'react-native';
+// import { AppLoading } from 'expo';
 import Slides from '../components/Slides';
 // import tsLogoPrimary from '../assets';
 
@@ -15,9 +15,6 @@ const SLIDE_DATA = [
 
 class WelcomeScreen extends Component {
   state = { token: null }
-
-  //uncomment this mount during production
-
   
   // componentWillMount() {
   //   const config = {
@@ -42,7 +39,7 @@ class WelcomeScreen extends Component {
   //   }
   // }
 
-  onSlidesComplete = () => {
+  onSlidesComplete = async () => {
     this.props.navigation.navigate('auth');
   }
 

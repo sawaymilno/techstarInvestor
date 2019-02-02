@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { clearLikedJobs } from '../actions';
+import { clearLikedCompanies } from '../actions';
 
 class SettingsScreen extends Component {
 
@@ -14,17 +14,15 @@ class SettingsScreen extends Component {
   }
 
   returnToSettings = () => {
-  // console.log(this.props, 'in Form_actions: this.props');
-
   this.props.navigation.navigate('review');
-  this.props.clearLikedJobs();
+  this.props.clearLikedCompanies();
   }
 
   render() {
     return (
       <View>
         <Button
-          title="Delete All Saved Jobs"
+          title="Delete All Saved Companies"
           large
           icon={{ name: 'delete-forever' }}
           backgroundColor="#F44336"
@@ -35,4 +33,4 @@ class SettingsScreen extends Component {
   }
 }
 
-export default connect(null, { clearLikedJobs })(SettingsScreen);
+export default connect(null, { clearLikedCompanies })(SettingsScreen);

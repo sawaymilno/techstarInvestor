@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import firebase from 'firebase';
 import { View, Text, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button, Spinner, Header } from '../components/common';
 import * as actions from '../actions';
-// import { emailChanged, passwordChanged, loginUser } from '../actions';
-
 
 class AuthScreen extends Component {
   // componentDidMount() {
@@ -30,26 +29,19 @@ class AuthScreen extends Component {
   //   }
   // }
 
-  onEmailChange = (text) => {
-    this.props.emailChanged(text);
-  }
-
-  onPasswordChange = (text) => {
-    this.props.passwordChanged(text);
-  }
-
-  onButtonPress = () => {
-    console.log('in AuthScreen this.props', this.props);
-    
+  onEmailChange = (text) => this.props.emailChanged(text);
+  onPasswordChange = (text) => this.props.passwordChanged(text);
+  onButtonPress = async () => {
     const { email, password } = this.props;
     this.props.loginUser({ email, password }, this.props.navigation.navigate);
+    const { data } = await axios.get('https://data.techstars.com/v2/companies');
+    this.props.loadCompanyDatabase(data.items);
   }
 
   renderButton = () => {
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
-
     return (
       <Button onPress={this.onButtonPress}>
         Login
@@ -57,6 +49,7 @@ class AuthScreen extends Component {
     );
   }
 
+  
   render() {
     return (
       <View>
@@ -102,18 +95,9 @@ const styles = {
   }
 };
 
-// function mapStateToProps({ auth }) {
-//   return { token: auth.token };
-// }
 const mapStateToProps = ({ auth }) => {
   const { email, password, error, loading } = auth;
-
   return { email, password, error, loading };
 };
 
 export default connect(mapStateToProps, actions)(AuthScreen);
-
-
-// export default connect(mapStateToProps, {
-//   emailChanged, passwordChanged, loginUser
-// })(LoginForm);

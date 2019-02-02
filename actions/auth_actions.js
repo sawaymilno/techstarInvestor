@@ -1,49 +1,26 @@
 import firebase from 'firebase';
-import axios from 'axios';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
-  LOGIN_LOAD_COMPANIES
 } from './types';
 
-export const emailChanged = (text) => {
-  return {
-    type: EMAIL_CHANGED,
-    payload: text
-  };
-};
 
-export const passwordChanged = (text) => {
-  return {
-    type: PASSWORD_CHANGED,
-    payload: text
-  };
-};
+export const emailChanged = (text) => ({ type: EMAIL_CHANGED, payload: text });
+export const passwordChanged = (text) => ({ type: PASSWORD_CHANGED, payload: text });
 
 export const loginUser = ({ email, password }, callback) => {
-  // console.log(callback, 'in login, callback');
-  const { currentUser } = firebase.auth();
-
   let userObject;
-  const get = async () => {
-    return await firebase.database().ref(`/users/${currentUser.uid}`)
+  const { currentUser } = firebase.auth();
+  const get = async () => (
+     await firebase.database().ref(`/users/${currentUser.uid}`)
     .on('value', snapshot => {
       userObject = snapshot.val();
-    });
-  };
+  }));
+
   get();
-
-  // let companiesArray;
-  // const getCompanies = async () => {
-  //   return await axios.get('https://data.techstars.com/v2/companies');
-  // };
-
-  // getCompanies();
-  
-  // console.log(companiesArray, 'companiesArray in auth_actions');
   
   return (dispatch) => {
     //dispatch is a 'redux-thunk' function to allow async calls
@@ -52,19 +29,11 @@ export const loginUser = ({ email, password }, callback) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => {
         loginUserSuccess(dispatch, user);
-        // loginLoadCompanies(dispatch, companiesArray);
-        // const { currentUser } = firebase.auth();
-        // console.log('companiesArray in auth_action', companiesArray);
-
-        // console.log(userObject, 'userObject', 'test inside loginusersuccess');
-
         if (!userObject) {
           // console.log('in the if statement');
-          
           firebase.database().ref(`/users/${currentUser.uid}`)
           .set({ info: '', lists: '', token: '' });
         }
-
         callback('form');
       })
       .catch((error) => {
@@ -74,23 +43,12 @@ export const loginUser = ({ email, password }, callback) => {
   };
 };
 
-const loginUserFail = (dispatch) => {
-  dispatch({ type: LOGIN_USER_FAIL });
-};
-
+const loginUserFail = (dispatch) => dispatch({ type: LOGIN_USER_FAIL });
 const loginUserSuccess = (dispatch, user) => {
-  // console.log(user, 'user in loginUserSuccess');
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-};
-
-const loginLoadCompanies = (dispatch, companies) => {
-  dispatch({ 
-    type: LOGIN_LOAD_COMPANIES,
-    payload: companies
-      });
 };
 
 /**************************** OLD CODE ****************************/

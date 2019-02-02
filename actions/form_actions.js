@@ -6,83 +6,35 @@ import qs from 'qs';
 
 import {
   FETCH_JOBS,
-  LIKE_JOB,
-  CLEAR_LIKED_JOBS,
+  LIKE_COMPANY,
+  CLEAR_LIKED_COMPANIES,
   FILTER_CITY,
-  LOGIN_LOAD_COMPANIES
+  LOGIN_LOAD_COMPANIES,
+  NEW_CUSTOM_LIST
 } from './types';
 
-export const cityChanged = (text) => {
-  console.log('cityChanged()-text', text);
-  return {
-    type: FILTER_CITY,
-    payload: text
-  };
+export const cityChanged = (text) => ({ type: FILTER_CITY, payload: text });
+export const loadCompanyDatabase = (obj) => {
+  console.log(obj, 'companydatabase in loadCompanyDatabase()');
+  
+  return ({ type: LOGIN_LOAD_COMPANIES, payload: obj });
 };
 
-export const companiesChanged = (obj) => {
-  return {
-    type: LOGIN_LOAD_COMPANIES,
-    payload: obj
-  };
-};
-          
-        
-/* THIS FUNCTION IS TO GET DATA TO THE FIREBASE/COMPANIES ROUTE TO BUILD THE DATABASE. 
-REMOVE ONCE DB IS COMPLETE */
 
-export const fetchCompanies = callback => async dispatch => {
-  // const COMPANY_ROOT = firebase.database().ref('/companies');
-  // let companiesArray;
-  try {
-    // const getCompanies = async () => (
-    //    await COMPANY_ROOT
-    //   .on('value', snapshot => {
-    //     companiesArray = snapshot.val();
-    //   })
-    // );
+export const buildCustomList = (props) => {
+  // const { city } = filterObj;
 
-    // getCompanies();
-  } catch (e) {
-    console.log(e, 'catch error in fetchCompanies');
-  }
-  // console.log('companiesArray in Form_actions', companiesArray); 
-  // callback('deck');
+  console.log(props.city, props.companies, 'in buildCustomList city, companies');
+
+  const results = props.companies.filter(company => company.location.city_name === props.city);
+  console.log(results, 'in buildCustomList results');
+  props.navigation.navigate('deck');
+  return ({ type: NEW_CUSTOM_LIST, payload: results });
 };
 
-// this function gets data from techstars and pushes it to firebase
-// const JOB_ROOT_URL = 'https://data.techstars.com/v1/companies';
-// export const fetchJobs = callback => async (dispatch) => {
-//   try {
-//     const { data } = await axios.get(JOB_ROOT_URL);
-//     const tempData = []; 
-//     for (let i = 0; i < 250; i++) {
-//       tempData.push(data.items[i]); 
-//     }
-//     // console.log(tempData, "data data in my fetchJobs");
-//     // const getCompanies = async (comp) => await axios.get(comp.href);
-//     const companies = await Promise.all(tempData.map(async (company, i) => {
-//       // console.log(company.href, 'inside companies form company.href');
-//       const { data } = await axios.get(company.href);
-//       console.log('data', i);
-//       return data;
-//     }));
-//     console.log(companies, 'items in fetchJobs');
-//     firebase.database().ref('/companies').set(companies);    
-//     // dispatch({ type: FETCH_JOBS, payload: companies });
-//     // callback();
-//   } catch (e) {
-//     console.log(e, 'catch error in fetchJobs');
-//   }
-// };
 
-export const likeJob = (job) => ({
-    payload: job,
-    type: LIKE_JOB
-  });
-
-
-export const clearLikedJobs = () => ({ type: CLEAR_LIKED_JOBS });
+export const likeCompany = (company) => ({ payload: company, type: LIKE_COMPANY });
+export const clearLikedCompanies = () => ({ type: CLEAR_LIKED_COMPANIES });
 
 
 /**********************OLD CODE **************************/
