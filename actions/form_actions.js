@@ -1,5 +1,5 @@
-import axios from 'axios';
 import firebase from 'firebase';
+import axios from 'axios';
 // import reverseGeocode from 'latlng-to-zip';
 import { Location } from 'expo';
 import qs from 'qs';
@@ -8,13 +8,22 @@ import {
   FETCH_JOBS,
   LIKE_JOB,
   CLEAR_LIKED_JOBS,
-  CITY_CHANGED
+  FILTER_CITY,
+  LOGIN_LOAD_COMPANIES
 } from './types';
 
 export const cityChanged = (text) => {
+  console.log('cityChanged()-text', text);
   return {
-    type: CITY_CHANGED,
+    type: FILTER_CITY,
     payload: text
+  };
+};
+
+export const companiesChanged = (obj) => {
+  return {
+    type: LOGIN_LOAD_COMPANIES,
+    payload: obj
   };
 };
           
@@ -23,21 +32,22 @@ export const cityChanged = (text) => {
 REMOVE ONCE DB IS COMPLETE */
 
 export const fetchCompanies = callback => async dispatch => {
-  const COMPANY_ROOT = firebase.database().ref('/companies');
+  // const COMPANY_ROOT = firebase.database().ref('/companies');
+  // let companiesArray;
   try {
-    let companiesObject;
-    const getCompanies = async () => (
-       await firebase.database().ref('/companies')
-      .on('value', snapshot => {
-        companiesObject = snapshot.val();
-      })
-    );
+    // const getCompanies = async () => (
+    //    await COMPANY_ROOT
+    //   .on('value', snapshot => {
+    //     companiesArray = snapshot.val();
+    //   })
+    // );
 
-    getCompanies();
-    console.log(companiesObject, 'companiesObject'); 
+    // getCompanies();
   } catch (e) {
     console.log(e, 'catch error in fetchCompanies');
   }
+  // console.log('companiesArray in Form_actions', companiesArray); 
+  // callback('deck');
 };
 
 // this function gets data from techstars and pushes it to firebase
@@ -86,28 +96,28 @@ export const clearLikedJobs = () => ({ type: CLEAR_LIKED_JOBS });
 // };
 
 // const JOB_QUERY_PARAMS = {
-  //   api_key: 'bd30dde2e8c818a9792851aef058eeae',
-  //   method: 'aj.jobs.search',
-  //   perpage: '5',
-  //   format: 'json',
-  // };
+//     api_key: 'bd30dde2e8c818a9792851aef058eeae',
+//     method: 'aj.jobs.search',
+//     perpage: '5',
+//     format: 'json',
+//   };
   
-  // const buildJobsUrl = (zip) => {
-    //   const query = qs.stringify({ ...JOB_QUERY_PARAMS });
-    //   return `${JOB_ROOT_URL}${query}`;
-    // };
+//   const buildJobsUrl = (zip) => {
+//       const query = qs.stringify({ ...JOB_QUERY_PARAMS });
+//       return `${JOB_ROOT_URL}${query}`;
+//     };
     
-    // export const fetchJobs = (region, callback) => async (dispatch) => {
-      //   try {
-        //     const zip = await Location.reverseGeocodeAsync(region);
-        //     const url = buildJobsUrl(zip);
-        //     console.log(url, 'URL!!!!!!!!');
-        //     const { data } = await axios.get(url);
-        //     console.log(data.listings.listing, 'data.listings.listing');
-        //     dispatch({ type: FETCH_JOBS, payload: data.listings.listing });
-        //     callback();
-        //   } catch (e) {
-          //     console.error(e);
-          //   }
-          // };
+//     export const fetchJobs = (region, callback) => async (dispatch) => {
+//         try {
+//             const zip = await Location.reverseGeocodeAsync(region);
+//             const url = buildJobsUrl(zip);
+//             console.log(url, 'URL!!!!!!!!');
+//             const { data } = await axios.get(url);
+//             console.log(data.listings.listing, 'data.listings.listing');
+//             dispatch({ type: FETCH_JOBS, payload: data.listings.listing });
+//             callback();
+//           } catch (e) {
+//               console.error(e);
+//             }
+//           };
 

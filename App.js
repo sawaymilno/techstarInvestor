@@ -84,8 +84,8 @@ export default class App extends React.Component {
   
     const Navigator = createAppContainer(createBottomTabNavigator({
       //change back to WelcomeScreen after testing
-      welcome: FormScreen,
-      // welcome: WelcomeScreen,  
+      // welcome: FormScreen,
+      welcome: WelcomeScreen,  
       auth: AuthScreen,  
       main: MainNavigator
     }));

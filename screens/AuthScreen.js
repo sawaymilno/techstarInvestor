@@ -39,6 +39,8 @@ class AuthScreen extends Component {
   }
 
   onButtonPress = () => {
+    console.log('in AuthScreen this.props', this.props);
+    
     const { email, password } = this.props;
     this.props.loginUser({ email, password }, this.props.navigation.navigate);
   }

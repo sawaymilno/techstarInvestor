@@ -5,7 +5,8 @@ import {
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER
+  LOGIN_USER,
+  LOGIN_LOAD_COMPANIES
 } from './types';
 
 export const emailChanged = (text) => {
@@ -23,7 +24,7 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = ({ email, password }, callback) => {
-  console.log(callback, 'in login, callback');
+  // console.log(callback, 'in login, callback');
   const { currentUser } = firebase.auth();
 
   let userObject;
@@ -35,16 +36,14 @@ export const loginUser = ({ email, password }, callback) => {
   };
   get();
 
-  let companiesObject;
-  const getCompanies = async () => {
-    return await firebase.database().ref('/companies')
-    .on('value', snapshot => {
-      companiesObject = snapshot.val();
-    });
-  };
+  // let companiesArray;
+  // const getCompanies = async () => {
+  //   return await axios.get('https://data.techstars.com/v2/companies');
+  // };
 
-  getCompanies();
+  // getCompanies();
   
+  // console.log(companiesArray, 'companiesArray in auth_actions');
   
   return (dispatch) => {
     //dispatch is a 'redux-thunk' function to allow async calls
@@ -53,13 +52,14 @@ export const loginUser = ({ email, password }, callback) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => {
         loginUserSuccess(dispatch, user);
+        // loginLoadCompanies(dispatch, companiesArray);
         // const { currentUser } = firebase.auth();
-        console.log(companiesObject, 'companiesObject');
+        // console.log('companiesArray in auth_action', companiesArray);
 
-        console.log(userObject, 'userObject', 'test inside loginusersuccess');
+        // console.log(userObject, 'userObject', 'test inside loginusersuccess');
 
         if (!userObject) {
-          console.log('in the if statement');
+          // console.log('in the if statement');
           
           firebase.database().ref(`/users/${currentUser.uid}`)
           .set({ info: '', lists: '', token: '' });
@@ -79,11 +79,18 @@ const loginUserFail = (dispatch) => {
 };
 
 const loginUserSuccess = (dispatch, user) => {
-  console.log(user, 'user in loginUserSuccess');
+  // console.log(user, 'user in loginUserSuccess');
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
+};
+
+const loginLoadCompanies = (dispatch, companies) => {
+  dispatch({ 
+    type: LOGIN_LOAD_COMPANIES,
+    payload: companies
+      });
 };
 
 /**************************** OLD CODE ****************************/

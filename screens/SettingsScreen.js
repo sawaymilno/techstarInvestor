@@ -14,7 +14,7 @@ class SettingsScreen extends Component {
   }
 
   returnToSettings = () => {
-  console.log(this.props, 'in job_actions: this.props');
+  // console.log(this.props, 'in Form_actions: this.props');
 
   this.props.navigation.navigate('review');
   this.props.clearLikedJobs();

@@ -29,7 +29,7 @@ class ReviewScreen extends Component {
 
   renderLikedJobs() {
 
-    console.log(this.props.likedJobs.results, 'this.props.likedJobs.results');
+    // console.log(this.props.likedJobs.results, 'this.props.likedJobs.results');
     
     const newList = this.props.likedJobs.results.map(job => {
       const { company, title, apply_url, id, post_date } = job;

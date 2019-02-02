@@ -11,7 +11,7 @@ export default function (state = { results: [] }, action) {
     case CLEAR_LIKED_JOBS:
       return { ...state, results: [] };
     case LIKE_JOB:
-      console.log('action.payload', action.payload);
+      // console.log('action.payload', action.payload);
     
       return {
         ...state,

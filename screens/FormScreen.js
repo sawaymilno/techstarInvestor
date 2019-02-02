@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { View, Platform, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { MapView, Permissions } from 'expo';
@@ -32,18 +33,21 @@ class FormScreen extends Component {
     }
   }
  
-  // async componentDidMount() {
-  //     await Permissions.askAsync(Permissions.LOCATION);
-  // }
- 
+  async componentDidMount() {
+    const { data } = await axios.get('https://data.techstars.com/v2/companies');
+    this.props.companiesChanged(data.items);
+      // await Permissions.askAsync(Permissions.LOCATION);
+  }
+  
   // onRegionChangeComplete = (region) => {
-  //   this.setState({ region });
-  // }
- 
-  onButtonPress = () => {
-    this.props.fetchCompanies(() => {
-      this.props.navigation.navigate('deck');
-    });
+    //   this.setState({ region });
+    // }
+    
+    onButtonPress = () => {
+      console.log('this.props', this.props);  
+      let { city } = this.props; 
+      city = city.toLowerCase(); 
+    this.props.fetchCompanies(city, this.props.navigation.navigate);
   }
 
   onCityChange = (text) => {
@@ -56,6 +60,7 @@ class FormScreen extends Component {
 
 
   renderButton = () => {
+    
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
@@ -92,21 +97,8 @@ class FormScreen extends Component {
           />
         </CardSection> */}
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
-
         <CardSection>
         {this.renderButton()}
-        {/* <View style={styles.buttonContainer}> */}
-              {/* <Button
-                large
-                title="Jobs In This Area"
-                backgroundColor="#009688"
-                icon={{ name: 'search' }}
-                onPress={this.onButtonPress}
-              /> */}
-            {/* </View> */}
         </CardSection>
       </Card>
       </View>
@@ -132,5 +124,12 @@ const styles = {
     right: 0
   }
 };
+
+const mapStateToProps = ({ form }) => {
+  const { city, companies } = form;
+  // const { companies } = auth;
+console.log(companies, 'companies');
+  return { city, companies };
+};
  
-export default connect(null, actions)(FormScreen);
+export default connect(mapStateToProps, actions)(FormScreen);

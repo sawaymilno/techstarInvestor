@@ -11,7 +11,7 @@ class Slides extends Component {
         <Button
           title="Invest!"
           large
-          icon={{ name: 'child' }}
+          icon={{ name: 'access-alarm' }}
           buttonStyle={styles.buttonStyle}
           onPress={this.props.onComplete}
         />
