@@ -6,7 +6,7 @@ const Header = (props) => {
     return (
         <View style={viewStyle}>
        <Image
-            style={{ width: 160, height: 35, marginTop: 15 }}
+            style={{ width: 160, height: 35, marginTop: 18 }}
             source={require('../../assets/tsLogo_Green_Horiz.png')}
        />
         <Text style={textStyle}>{props.headerText}</Text>
@@ -19,7 +19,7 @@ const styles = {
         backgroundColor: '#0DB14B',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 70,
+        height: 90,
         paddingTop: 25,
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 2 },

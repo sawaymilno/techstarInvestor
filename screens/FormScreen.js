@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 // import { MapView, Permissions } from 'expo';
 import { connect } from 'react-redux';
 
-import { Header, Card, CardSection, Input, Button, Spinner } from '../components/common';
+import { Header, CustomCard, CardSection, Input, Button, Spinner } from '../components/common';
 import * as actions from '../actions';
  
 class FormScreen extends Component {
@@ -16,8 +16,8 @@ class FormScreen extends Component {
           <Button
             title="Settings"
             onPress={() => navigation.navigate('settings')}
-            backgroundColor="rgba(0,0,0,0)"
-            color="rgba(0, 122, 255, 1)"
+            backgroundColor="rgba(109, 145, 163)"
+            color="rgba(13, 177, 75)"
           />,
         style: {
           marginTop: Platform.OS === 'android' ? 24 : 0
@@ -40,16 +40,29 @@ class FormScreen extends Component {
     //   this.setState({ region });
     // }
     
-  onButtonPress = () => this.props.buildCustomList(this.props);
+  onButtonPress = () => {
+    // console.log(this.props, 'this.props onButtonPress');
+    // store();
+    // console.log(item, 'item in button');
+    // console.log(this, 'this');
+    // if (this.props.companies.length === 0) {
+    //     this.props.loadingChanged(true);
+    //     console.log('in if statement after this');
+    //    (subscribe) => {
+    //     console.log('in the subscribe function');
+        
+    //     subscribe(this.props.buildCustonList(this.props), this.props.loadingChanged(false));
+    //   };
+    // }
+        this.props.buildCustomList(this.props);
+    //     this.props.loadingChanged(false);
+  };
+
   onCityChange = (text) => this.props.cityChanged(text);
-
-  // onPasswordChange = (text) => {
-  //   this.props.passwordChanged(text);
-  // }
-
+  onStatusChange = (text) => this.props.statusChanged(text);
 
   renderButton = () => {
-    if (this.props.loading) {
+    if (this.props.formLoading) {
       return <Spinner size="large" />;
     }
 
@@ -61,46 +74,37 @@ class FormScreen extends Component {
   }
  
   render() {
-        return (
-          <View>
+    return (
+      <View>
         <Header />
-      <Card>
-        <CardSection>
-          <Input
-            label="City"
-            placeholder="city"
-            onChangeText={this.onCityChange}
-            value={this.props.city}
-          />
-        </CardSection>
+        <CustomCard>
+          <CardSection>
+            <Input
+              label="City"
+              placeholder="city"
+              onChangeText={this.onCityChange}
+              value={this.props.city}
+            />
+          </CardSection>
 
-        {/* <CardSection>
-          <Input
-            secureTextEntry
-            label="Password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange}
-            value={this.props.password}
-          />
-        </CardSection> */}
+          <CardSection>
+            <Input
+              label="Status"
+              placeholder="status"
+              onChangeText={this.onStatusChange}
+              value={this.props.status}
+            />
+          </CardSection>
 
-        <CardSection>
-        {this.renderButton()}
-        </CardSection>
-      </Card>
+          <CardSection>
+          {this.renderButton()}
+          </CardSection>
+
+         </CustomCard>
       </View>
-          // <View style={{ flex: 1 }}>
-          // <Header />
-          //   <MapView
-          //     region={this.state.region}
-          //     style={{ flex: 1 }}
-          //     onRegionChangeComplete={this.onRegionChangeComplete}
-          //   />
-            
-          // </View>
-        );
-      }
-    }
+    );
+  }
+}
     
 // const styles = {
 //   buttonContainer: {
@@ -111,9 +115,9 @@ class FormScreen extends Component {
 //   }
 // };
 
-const mapStateToProps = ({ form }) => {
-  const { city, companies } = form;
-  return { city, companies };
+const mapStateToProps = ({ form, }) => {
+  const { city, companies, status, formLoading } = form;
+  return { city, companies, status, formLoading };
 };
  
 export default connect(mapStateToProps, actions)(FormScreen);

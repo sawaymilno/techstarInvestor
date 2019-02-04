@@ -11,7 +11,7 @@ const store = createStore(
   {},
   compose(
     applyMiddleware(thunk),
-    autoRehydrate()
+    autoRehydrate(),
   )
 );
 

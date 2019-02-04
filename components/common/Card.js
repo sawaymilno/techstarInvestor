@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-const Card = (props) => (
+const CustomCard = (props) => (
     <View style={styles.containerStyle}>
         { props.children }
     </View>
@@ -26,4 +26,4 @@ const styles = {
 
 };
 
-export { Card };
+export { CustomCard };

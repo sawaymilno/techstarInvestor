@@ -3,7 +3,7 @@ import axios from 'axios';
 import firebase from 'firebase';
 import { View, Text, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Button, Spinner, Header } from '../components/common';
+import { CustomCard, CardSection, Input, Button, Spinner, Header } from '../components/common';
 import * as actions from '../actions';
 
 class AuthScreen extends Component {
@@ -39,7 +39,7 @@ class AuthScreen extends Component {
   }
 
   renderButton = () => {
-    if (this.props.loading) {
+    if (this.props.authLoading) {
       return <Spinner size="large" />;
     }
     return (
@@ -53,7 +53,7 @@ class AuthScreen extends Component {
     return (
       <View>
         <Header />
-      <Card>
+      <CustomCard>
         <CardSection>
           <Input
             label="Email"
@@ -80,7 +80,7 @@ class AuthScreen extends Component {
         <CardSection>
           {this.renderButton()}
         </CardSection>
-      </Card>
+      </CustomCard>
       </View>
     );
   }
@@ -95,8 +95,8 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth;
-  return { email, password, error, loading };
+  const { email, password, error, authLoading } = auth;
+  return { email, password, error, authLoading };
 };
 
 export default connect(mapStateToProps, actions)(AuthScreen);

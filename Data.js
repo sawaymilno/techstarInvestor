@@ -1,13 +1,4 @@
-import {
-  LOGIN_LOAD_COMPANIES,
-  LOADING_DATA,
-  FILTER_CITY,
-  FILTER_STATUS,
-  NEW_CUSTOM_LIST
-} from '../actions/types';
-// import data from '../Data';
-
-const data = [
+export const data = [
   {
   "id": "10-percent-happier-meditation-for-fidgety-skeptics",
   "name": "10% Happier: Meditation for Fidgety Skeptics",
@@ -40076,29 +40067,3 @@ const data = [
   ]
   }
   ]
-
-  const INITIAL_STATE = {
-    city: '',
-    status: '',
-    formLoading: false,
-    companies: data,
-    newList: [] 
-  };
-
-
-export default function (state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOGIN_LOAD_COMPANIES:
-      return { ...state, companies: action.payload, formLoading: false };
-    case LOADING_DATA:
-      return { ...state, formLoading: action.payload };
-    case FILTER_CITY:
-      return { ...state, city: action.payload };
-    case FILTER_STATUS:
-      return { ...state, status: action.payload };
-    case NEW_CUSTOM_LIST:
-    return { ...state, newList: action.payload, city: '', status: '' };
-    default:
-      return state;
-  }
-}

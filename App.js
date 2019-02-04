@@ -1,6 +1,6 @@
 // import { Notifications } from 'expo';
 import React from 'react';
-// import { StyleSheet, Alert } from 'react-native';
+import { /*StyleSheet, Alert*/ Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { 
   createBottomTabNavigator, 
@@ -50,16 +50,61 @@ export default class App extends React.Component {
   
   render() {
     console.log('In App');
+
+    const mainOptions = {
+      tabBarOptions: {
+        activeTintColor: '#2A3842',
+        inactiveTintColor: 'white',
+        activeBackgroundColor: '#0B9841',
+        // inactiveBackgroundColor: ''
+        style: {
+          backgroundColor: '#0DB14B'
+        }
+      }
+    };
+
+    const Options = { 
+      tabBarVisible: false, 
+      tabBarPosition: 'bottom',
+      tabBarOptions: {
+        labelStyle: { fontSize: 12 }
+      } 
+    };
+
+    const stackStyles = {
+      headerTitle: (
+        < Image style={{ width: 160, height: 35, marginBottom: 15 }} source={require('./assets/tsLogo_Green_Horiz.png')} />
+        ),
+      headerStyle: {
+        backgroundColor: '#0DB14B',
+        headerTintColor: 'white',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        height: 46,
+        // paddingTop: 25,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        elevation: 2,
+        // position: 'relative',
+      }
+    };
     
     const ReviewNavigator = createStackNavigator(
       {
-        review: ReviewScreen,
-        settings: SettingsScreen
+        review: {
+          screen: ReviewScreen,
+          navigationOptions: stackStyles
+        },
+        settings: {
+          screen: SettingsScreen,
+          navigationOptions: stackStyles
+        } 
       },
       {
         navigationOptions: {
           headerStyle: styles.container,
-          title: 'Review Jobs',
+          // title: 'Review Jobs',
           tabBarIcon: ({ tintColor }) => <Icon name="favorite" size={30} color={tintColor} />
         }
       }
@@ -67,27 +112,35 @@ export default class App extends React.Component {
 
     const MainNavigator = createBottomTabNavigator(
       {
-      form: FormScreen,
-      deck: DeckScreen,
-      screen: ReviewNavigator
+      form: {
+        screen: FormScreen,
+        navigationOptions: mainOptions
+      },
+      deck: {
+        screen: DeckScreen,
+        navigationOptions: mainOptions
       }, 
-      {
-        navigationOptions: { 
-          tabBarVisible: false, 
-          tabBarPosition: 'bottom',
-          tabBarOptions: {
-            labelStyle: { fontSize: 12 }
-          }
-        }
+      Review: {
+        screen: ReviewNavigator,
+        navigationOptions: mainOptions
+      } 
+      }, {
+        navigationOptions: Options 
       }
     );
   
     const Navigator = createAppContainer(createBottomTabNavigator({
-      //change back to WelcomeScreen after testing
+      //change welcome to WelcomeScreen after testing
       // welcome: FormScreen,
-      welcome: WelcomeScreen,  
-      auth: AuthScreen,  
-      main: MainNavigator
+      // welcome: {
+      //   screen: WelcomeScreen,
+      //   navigationOptions: Options
+      // },
+      // auth: {
+      //   screen: AuthScreen,
+      //   navigationOptions: Options
+      // },
+      welcome: MainNavigator
     }));
  
     return (

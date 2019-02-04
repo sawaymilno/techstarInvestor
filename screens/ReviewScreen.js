@@ -5,20 +5,16 @@ import { Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 class ReviewScreen extends Component {
-  // static navigationOptions = {
-  //   title: 'Review Jobs',
-  //   tabBarIcon: ({ tintColor }) => <Icon name="favorite" size={30} color={tintColor} /> 
-  // }
 
   static navigationOptions = ({ navigation }) => ({
-    title: 'Review Jobs',
+    title: 'Company',
     tabBarIcon: ({ tintColor }) => <Icon name="favorite" size={30} color={tintColor} />,
     headerRight: 
           <Button
             title="Settings"
             onPress={() => navigation.navigate('settings')}
-            backgroundColor="rgba(0,0,0,0)"
-            color="rgba(0, 122, 255, 1)"
+            style={styles.buttonStyle}
+            color="white"
           />,
         style: {
           marginTop: Platform.OS === 'android' ? 24 : 0
@@ -77,6 +73,9 @@ const styles = {
     marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  buttonStyle: {
+    // marginBottom: 40
   }
 };
 

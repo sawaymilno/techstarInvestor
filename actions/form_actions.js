@@ -7,24 +7,22 @@ import {
   LIKE_COMPANY,
   CLEAR_LIKED_COMPANIES,
   FILTER_CITY,
+  FILTER_STATUS,
   LOGIN_LOAD_COMPANIES,
-  NEW_CUSTOM_LIST
+  LOADING_DATA
 } from './types';
 
-export const cityChanged = (text) => ({ type: FILTER_CITY, payload: text });
 export const loadCompanyDatabase = (obj) => {
   console.log(obj, 'companydatabase in loadCompanyDatabase()');
   return ({ type: LOGIN_LOAD_COMPANIES, payload: obj });
 };
 
-export const buildCustomList = (props) => {
-  const results = props.companies.filter(company => company.location.city_name === props.city);
-  props.navigation.navigate('deck');
-  return ({ type: NEW_CUSTOM_LIST, payload: results });
-};
 
+export const cityChanged = (text) => ({ type: FILTER_CITY, payload: text });
+export const statusChanged = (text) => ({ type: FILTER_STATUS, payload: text });
+export const loadingChanged = (value) => ({ type: LOADING_DATA, payload: value });
 
-export const likeCompany = (company) => ({ payload: company, type: LIKE_COMPANY });
+export const likeCompany = (company) => ({ type: LIKE_COMPANY, payload: company });
 export const clearLikedCompanies = () => ({ type: CLEAR_LIKED_COMPANIES });
 
 
