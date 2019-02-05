@@ -37,12 +37,13 @@ class FormScreen extends Component {
     // }
     
   onButtonPress = () => this.props.buildCustomList(this.props);
-  onModalPress = () => {
-    console.log(this.props.tags, 'tags in props');
-    this.setState({visible: !this.state.visible});
-  }
+  onModalPress = () => this.setState({visible: !this.state.visible});
+
+  onNameChange = (text) => this.props.nameChanged(text);
   onCityChange = (text) => this.props.cityChanged(text);
   onStatusChange = (text) => this.props.statusChanged(text);
+  onStateChange = (text) => this.props.stateChanged(text);
+  onCountryChange = (text) => this.props.countryChanged(text);
 
   onTagChange = (i,tag) => {
     console.log(i, tag, 'tag in modal');
@@ -66,7 +67,7 @@ class FormScreen extends Component {
  
   render() {
     const tags = []
-    const tagResults = []
+    let tagResults = []
     this.props.companies.forEach(company => {
       tags.push(...company.tags)
     }) 
@@ -75,16 +76,42 @@ class FormScreen extends Component {
       tagResults.push(unique[i])
     }
 
+    tagResults = tagResults.sort()
+
     return (
       <View>
         <Header />
         <CustomCard>
           <CardSection>
             <Input
+              label="Name"
+              placeholder="name"
+              onChangeText={this.onNameChange}
+              value={this.props.name}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
               label="City"
               placeholder="city"
               onChangeText={this.onCityChange}
               value={this.props.city}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+              label="State/Prov"
+              placeholder="state/prov"
+              onChangeText={this.onStateChange}
+              value={this.props.state}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+              label="Country"
+              placeholder="country"
+              onChangeText={this.onCountryChange}
+              value={this.props.country}
             />
           </CardSection>
 
@@ -149,8 +176,8 @@ class FormScreen extends Component {
 // };
 
 const mapStateToProps = ({ form, }) => {
-  const { city, companies, status, formLoading, tags } = form;
-  return { city, companies, status, formLoading, tags };
+  const { city, state, country, companies, status, formLoading, tags, name } = form;
+  return { city, state, country, companies, status, formLoading, tags, name };
 };
  
 export default connect(mapStateToProps, actions)(FormScreen);

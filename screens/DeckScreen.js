@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Card, Icon } from 'react-native-elements';
 import Tags from 'react-native-tags';
 import Swipe from '../components/Swipe';
-import { Header, Button, CustomCard, CardSection, Result } from '../components/common';
+import { Header, Button, CustomCard, CardSection, Result, TagResults } from '../components/common';
 import * as actions from '../actions';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -16,6 +16,11 @@ class DeckScreen extends Component {
     tabBarIcon: ({ tintColor }) => <Icon name="description" size={30} color={tintColor} /> 
   }
 
+  clearTheForm = () => {
+    console.log('clearTheForm()');
+    this.props.clearForm()
+    this.props.navigation.navigate('form')
+  }
   renderCard(company) {
     return (
     <Card title={company.name} >
@@ -36,9 +41,10 @@ class DeckScreen extends Component {
           <View>
             <Result label="Decription:" value={company.brief_description} />
           </View>
-          <View >
-            <Tags label="Tags:" initialTags={company.tags} readonly={true} />
-          </View>
+            <Result label="Status:" value={company.status} />
+          {/* <View >
+            <TagResults label="Tags:" tags={company.tags} />
+          </View> */}
         </View>
 
           <View style={styles.logoStyle}>
@@ -60,7 +66,10 @@ class DeckScreen extends Component {
   renderNoMoreCards = () => (
     <View style={{ marginTop: 225 }} >
         <CardSection>
-          <Button onPress={() => this.props.navigation.navigate('form')}>
+          <Button onPress={
+            this.clearTheForm
+           
+          }>
           End Of List Return To Search
           </Button>
         </CardSection>
@@ -93,8 +102,7 @@ const canvas = {
 
 const styles = {
   cardStyle: {
-    height: SCREEN_HEIGHT/2,
-    // backgroundColor: '#6D91A3'
+    height: SCREEN_HEIGHT*.6,
   },
   rowOneStyle: {
     flexDirection: 'row',

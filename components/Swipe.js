@@ -8,6 +8,7 @@ import {
   UIManager,
   Platform
 } from 'react-native';
+import Tags from 'react-native-tags';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
