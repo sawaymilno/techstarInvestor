@@ -8,6 +8,7 @@ export const LOGIN_LOAD_COMPANIES = 'login_load_companies';
 export const LOADING_DATA = 'loading_data';
 export const FILTER_CITY = 'filter_city';
 export const FILTER_STATUS = 'filter_status';
+export const FILTER_TAG = 'filter_tag';
 
 export const LIKE_COMPANY = 'like_company';
 export const NEW_CUSTOM_LIST = 'new_custom_list';

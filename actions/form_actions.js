@@ -8,6 +8,7 @@ import {
   CLEAR_LIKED_COMPANIES,
   FILTER_CITY,
   FILTER_STATUS,
+  FILTER_TAG,
   LOGIN_LOAD_COMPANIES,
   LOADING_DATA
 } from './types';
@@ -21,6 +22,7 @@ export const loadCompanyDatabase = (obj) => {
 export const cityChanged = (text) => ({ type: FILTER_CITY, payload: text });
 export const statusChanged = (text) => ({ type: FILTER_STATUS, payload: text });
 export const loadingChanged = (value) => ({ type: LOADING_DATA, payload: value });
+export const tagChanged = (tag) => ({type: FILTER_TAG, payload: tag });
 
 export const likeCompany = (company) => ({ type: LIKE_COMPANY, payload: company });
 export const clearLikedCompanies = () => ({ type: CLEAR_LIKED_COMPANIES });

@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, Linking, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, Icon } from 'react-native-elements';
+import Tags from 'react-native-tags';
 import Swipe from '../components/Swipe';
 import { Header, Button, CustomCard, CardSection, Result } from '../components/common';
 import * as actions from '../actions';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 class DeckScreen extends Component {
   static navigationOptions = {
@@ -16,37 +18,41 @@ class DeckScreen extends Component {
 
   renderCard(company) {
     return (
-      <Card title={company.name} >
-      <View style={styles.cardStyle}>
-
-          <View style={styles.imageWrapper}>
-            <View style={styles.imageStyle}>
-              <Image
-                style={{ width: 50, height: 50 }}
-                source={{ uri: company.logo_url }}
-              />
-            </View>
-
-            <View style={styles.locationStyle}>
-              <Text>{`${company.location.city_name} ${company.location.state_province_code}. ${company.location.country_code}`}</Text>
-            </View>
+    <Card title={company.name} >
+      <View style={styles.cardStyle} >
+        <View style={styles.rowOneStyle}>
+          <View style={styles.imageStyle}>
+            <Image
+              style={{ width: 50, height: 50 }}
+              source={{ uri: company.logo_url }}
+            />
           </View>
-
-        <View>
-            <View>
-              <Result label="Details:" value={company.brief_description} />
-            </View>
-
-            <View>
-              <Result label="Crunch Base:" value={company.crunchbase_url} />
-            </View>
-
-            <View>
-              <Result label="Tags:" value={company.tags} />
-            </View>
+          <View style={styles.locationStyle}>
+            <Text>{`${company.location.city_name} ${company.location.state_province_code}. ${company.location.country_code}`}</Text>
+          </View>
         </View>
+        
+        <View>
+          <View>
+            <Result label="Decription:" value={company.brief_description} />
+          </View>
+          <View >
+            <Tags label="Tags:" initialTags={company.tags} readonly={true} />
+          </View>
+        </View>
+
+          <View style={styles.logoStyle}>
+          {/* <View style={{ marginLeft: 20, flexDirection: 'column', justifyContent: 'center'}}> */}
+            {/* <Text style={{justifyContent: 'center'}}>{company.brief_description}</Text> */}
+            <Image
+              resizeMode="contain"
+              style={canvas}
+              source={{ uri: company.logo_url }}
+            />
+          </View>
+        {/* </View> */}
       </View>
-        </Card>
+    </Card>
     );
   }
   
@@ -70,7 +76,6 @@ class DeckScreen extends Component {
         <Header />
         <View style={{ marginTop: 25 }}>
           <Swipe
-            // style={styles.cardStyle}
             data={this.props.newList}
             renderCard={this.renderCard}
             renderNoMoreCards={this.renderNoMoreCards}
@@ -82,45 +87,45 @@ class DeckScreen extends Component {
     );
   }
 }
+const canvas = {
+  position: 'absolute', top: 5, left: 5, bottom: 5, right: 5,
+}
 
 const styles = {
   cardStyle: {
-    height: SCREEN_HEIGHT/2
+    height: SCREEN_HEIGHT/2,
+    // backgroundColor: '#6D91A3'
   },
-  imageWrapper: {
-    // paddingLeft: 10,
-    // height: 40,
-    // flex: 1,
+  rowOneStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 2,
+    borderTopWidth: 2,
+    borderRightWidth: 2,
+    borderLeftWidth: 2,
     borderColor: '#d6d7da',
+    backgroundColor: 'white'
   },
   imageStyle: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // height: 300,
-    // bottomBorderWidth: 1,
-    // padding: 5,
-    // backgroundColor: '#fff',
-    // justifyContent: 'flex-start',
-    // flexDirection: 'row',
-    // borderColor: '#ddd',
-    // position: 'relative',
-    borderWidth: 2,
-    borderColor: '#d6d7da',
+    marginLeft: 5,
+    marginRight: 5,
 },
   locationStyle: {
-    // color: '#000',
-    // paddingRight: 100,
-    // paddingLeft: 5,
-    // fontSize: 18,
-    // lineHeight: 23,
-    borderWidth: 2,
-    borderColor: '#d6d7da',
+    marginLeft: 5,
+    marginRight: 5,
     flex: 3,
     alignItems: 'flex-start'
+  },
+  logoStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    justifyContent: 'stretch',
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: '#d6d7da',
   }
 };
 

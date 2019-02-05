@@ -3,6 +3,7 @@ import {
   LOADING_DATA,
   FILTER_CITY,
   FILTER_STATUS,
+  FILTER_TAG,
   NEW_CUSTOM_LIST
 } from '../actions/types';
 // import data from '../Data';
@@ -40080,6 +40081,7 @@ const data = [
   const INITIAL_STATE = {
     city: '',
     status: '',
+    tags: [],
     formLoading: false,
     companies: data,
     newList: [] 
@@ -40096,6 +40098,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, city: action.payload };
     case FILTER_STATUS:
       return { ...state, status: action.payload };
+    case FILTER_TAG:
+      return { ...state, tags: [...state.tags, action.payload] };
     case NEW_CUSTOM_LIST:
     return { ...state, newList: action.payload, city: '', status: '' };
     default:
