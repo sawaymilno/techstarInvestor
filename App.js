@@ -106,9 +106,14 @@ export default class App extends React.Component {
           headerStyle: styles.container,
           // title: 'Review Jobs',
           tabBarIcon: ({ tintColor }) => <Icon name="favorite" size={30} color={tintColor} />
+        },
+        cardStyle: {
+          backgroundColor: '#6D91A3'
         }
       }
     ); 
+
+    
 
     const MainNavigator = createBottomTabNavigator(
       {

@@ -10,9 +10,7 @@ class SettingsScreen extends Component {
     headerTintColor: 'white',
     headerStyle: {
         marginTop: Platform.OS === 'android' ? 24 : 0,
-        color: 'white',
       }
-    
   }
 
   returnToSettings = () => {
@@ -22,24 +20,20 @@ class SettingsScreen extends Component {
 
   render() {
     return (
-      <View style={{ marginTop: 250 }}>
-        <CardSection>
-          <Button
-            // ButtonStyle={styles}
-            title="Delete All Saved Companies"
-            large
-            icon={{ name: 'delete-forever' }}
-            
-            onPress={this.returnToSettings}
-          >Delete All Saved Companies</Button>
-        </CardSection>
+      <View style={{marginTop: 250}}>
+        <CustomCard style={{backgroundColor: '#6D91A3' }}>
+          <CardSection style={{backgroundColor: '#6D91A3'}}>
+            <Button
+              title="Delete All Saved Companies"
+              large
+              icon={{ name: 'delete-forever' }}
+              onPress={this.returnToSettings}
+            >Delete All Saved Companies</Button>
+          </CardSection>
+        </CustomCard>
       </View>
     );
   }
 }
-
-const styles = {
-  backgroundColor: '#0DB14B'
-};
 
 export default connect(null, { clearLikedCompanies })(SettingsScreen);
