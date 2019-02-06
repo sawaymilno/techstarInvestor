@@ -34,8 +34,4 @@ const styles = {
 
 };
 
-// grey #2A3842
-// green #0DB14B
-// blue #6D91A3
-
 export { Button };

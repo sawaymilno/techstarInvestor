@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import Tags from 'react-native-tags';
 
 const TagResults = ({ label, tags }) => {

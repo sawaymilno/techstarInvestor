@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 
 const Result = ({ label, value }) => {
 const { inputStyle, labelStyle, containerStyle } = styles;
