@@ -113,7 +113,6 @@ export default class App extends React.Component {
       }
     ); 
 
-    
 
     const MainNavigator = createBottomTabNavigator(
       {
@@ -137,15 +136,15 @@ export default class App extends React.Component {
     const Navigator = createAppContainer(createBottomTabNavigator({
       //change welcome to WelcomeScreen after testing
       // welcome: FormScreen,
-      // welcome: {
-      //   screen: WelcomeScreen,
-      //   navigationOptions: Options
-      // },
-      // auth: {
-      //   screen: AuthScreen,
-      //   navigationOptions: Options
-      // },
-      welcome: MainNavigator
+      welcome: {
+        screen: WelcomeScreen,
+        navigationOptions: Options
+      },
+      auth: {
+        screen: AuthScreen,
+        navigationOptions: Options
+      },
+      main: MainNavigator
     }));
  
     return (

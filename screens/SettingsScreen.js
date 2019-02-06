@@ -14,15 +14,15 @@ class SettingsScreen extends Component {
   }
 
   returnToSettings = () => {
-  this.props.navigation.navigate('deck');
+  this.props.navigation.navigate('review');
   this.props.clearLikedCompanies();
   }
 
   render() {
     return (
-      <View style={{marginTop: 250}}>
-        <CustomCard style={{backgroundColor: '#6D91A3' }}>
-          <CardSection style={{backgroundColor: '#6D91A3'}}>
+      <View style={{ marginTop: 250 }}>
+        <CustomCard style={{ backgroundColor: '#6D91A3' }}>
+          <CardSection style={{ backgroundColor: '#6D91A3' }}>
             <Button
               title="Delete All Saved Companies"
               large

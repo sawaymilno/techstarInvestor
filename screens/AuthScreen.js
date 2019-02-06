@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from 'firebase';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, Text, Dimensions, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { CustomCard, CardSection, Input, Button, Spinner, Header } from '../components/common';
 import * as actions from '../actions';
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+
 
 class AuthScreen extends Component {
   // componentDidMount() {
@@ -51,36 +54,38 @@ class AuthScreen extends Component {
   
   render() {
     return (
-      <View>
+      <View style={{ backgroundColor: '#6D91A3', height: SCREEN_HEIGHT }}>
         <Header />
-      <CustomCard>
-        <CardSection>
-          <Input
-            label="Email"
-            placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange}
-            value={this.props.email}
-          />
-        </CardSection>
+        <View style={{ marginTop: 225 }}>
+          <CustomCard>
+            <CardSection>
+              <Input
+                label="Email"
+                placeholder="email@gmail.com"
+                onChangeText={this.onEmailChange}
+                value={this.props.email}
+              />
+            </CardSection>
 
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="Password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange}
-            value={this.props.password}
-          />
-        </CardSection>
+            <CardSection>
+              <Input
+                secureTextEntry
+                label="Password"
+                placeholder="password"
+                onChangeText={this.onPasswordChange}
+                value={this.props.password}
+              />
+            </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
+            <Text style={styles.errorTextStyle}>
+              {this.props.error}
+            </Text>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </CustomCard>
+            <CardSection>
+              {this.renderButton()}
+            </CardSection>
+          </CustomCard>
+        </View>
       </View>
     );
   }

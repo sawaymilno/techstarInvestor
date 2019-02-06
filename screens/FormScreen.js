@@ -30,7 +30,7 @@ class FormScreen extends Component {
   }
     
   onButtonPress = () => this.props.buildCustomList(this.props);
-  onModalPress = () => this.setState({visible: !this.state.visible});
+  onModalPress = () => this.setState({ visible: !this.state.visible });
 
   onNameChange = (text) => this.props.nameChanged(text);
   onCityChange = (text) => this.props.cityChanged(text);
@@ -53,20 +53,20 @@ class FormScreen extends Component {
   }
  
   render() {
-    const tags = []
-    let tagResults = []
+    const tags = [];
+    let tagResults = [];
     this.props.companies.forEach(company => {
-      tags.push(...company.tags)
-    }) 
+      tags.push(...company.tags);
+    }); 
     const unique = tags.filter(this.onlyUnique);
     for (let i = 0; i < 100; i++) {
-      tagResults.push(unique[i])
+      tagResults.push(unique[i]);
     }
 
     tagResults = tagResults.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
     return (
-      <View style={{backgroundColor: '#6D91A3', height: SCREEN_HEIGHT*.95}}>
+      <View style={{ backgroundColor: '#6D91A3', height: SCREEN_HEIGHT * 0.95 }}>
         <Header />
         <ScrollView>
           <View>

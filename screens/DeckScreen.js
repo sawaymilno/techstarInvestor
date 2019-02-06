@@ -57,9 +57,9 @@ class DeckScreen extends Component {
   
 
   renderNoMoreCards = () => (
-    <View style={{ marginTop: 225, }} >
-      <CustomCard style={{backgroundColor: '#6D91A3'}}>
-        <CardSection style={{backgroundColor: '#6D91A3'}}>
+    <View style={{ marginTop: 225 }} >
+      <CustomCard style={{ backgroundColor: '#6D91A3' }}>
+        <CardSection style={{ backgroundColor: '#6D91A3' }}>
           <Button onPress={this.clearTheForm}>
           End Of List Return To Search
           </Button>

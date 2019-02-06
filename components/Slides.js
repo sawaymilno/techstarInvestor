@@ -8,13 +8,13 @@ class Slides extends Component {
   renderLastSlide(index) {
     if (index === this.props.data.length - 1) {
       return (
-        <Button
-          title="Invest!"
-          large
-          icon={{ name: 'access-alarm' }}
-          buttonStyle={styles.buttonStyle}
-          onPress={this.props.onComplete}
-        />
+            <Button
+              title="Click here to invest!"
+              titleStyle={{ color: 'black' }}
+              icon={{ name: 'accessibility' }}
+              buttonStyle={styles.buttonStyle}
+              onPress={this.props.onComplete}
+            />
       );
     }
   }
@@ -33,7 +33,7 @@ class Slides extends Component {
           />
         </View>
           <View >
-            <Text style={styles.textStyle}>{slide.text}</Text>
+            <Text style={[styles.textStyle, { color: slide.textColor }]}>{slide.text}</Text>
             {this.renderLastSlide(index)}
           </View>
         </View>
@@ -64,13 +64,11 @@ const styles = {
   textStyle: {
     marginTop: 50,
     fontSize: 30,
-    color: 'white',
     textAlign: 'center'
   },
   buttonStyle: {
-    backgroundColor: '#0DB14B',
+    backgroundColor: 'white',
     marginTop: 20
-
   }
 };
 

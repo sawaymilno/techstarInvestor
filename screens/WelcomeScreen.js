@@ -7,11 +7,10 @@ import Slides from '../components/Slides';
 // import tsLogoPrimary from '../assets';
 
 const SLIDE_DATA = [
-  { text: 'Welcome to TechStar InVestor', color: '#2A3842', image: require('../assets/tsLogo_Primary.png'), textColor: '#6D91A3' },
-  { text: 'We provide the company data', color: '#0DB14B', image: require('../assets/tsLogo_Green.png'), textColor: '#0DB14B' },
-  { text: 'You provide the support!', color: '#6D91A3', image: require('../assets/tsLogo_Black.png'), textColor: '#2A3842' }
+  { text: 'welcome to techstars investor', color: '#2A3842', image: require('../assets/tsLogo_Primary.png'), textColor: '#6D91A3' },
+  { text: 'we provide the company data', color: '#6D91A3', image: require('../assets/tsLogo_Black.png'), textColor: 'black' },
+  { text: 'you provide the support!', color: '#0DB14B', image: require('../assets/tsLogo_Green.png'), textColor: 'white' }
 ];
-
 
 class WelcomeScreen extends Component {
   state = { token: null }
