@@ -22,8 +22,6 @@ export const loginUser = ({ email, password }, callback) => {
   get();
   
   return (dispatch) => {
-    //dispatch is a 'redux-thunk' library that allows delivering 
-    //functions instead of just objects for the reducer
     dispatch({ type: LOGIN_USER });
 
     firebase.auth().signInWithEmailAndPassword(email, password)

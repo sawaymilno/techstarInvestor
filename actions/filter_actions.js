@@ -4,13 +4,12 @@ import { NEW_CUSTOM_LIST } from './/types';
 export const buildCustomList = (props) => {
   let count = 0;
   const results = props.companies.filter(company => {
-
     const companyName = company.name.toLowerCase();
     const companyCity = company.location.city_name.toLowerCase();
     const companyState = company.location.state_province_code.toLowerCase();
     const companyCountry = company.location.country_code.toLowerCase();
     const companyStatus = company.status.toLowerCase();
-    const companyTagsArray = company.tags
+    const companyTagsArray = company.tags;
 
     const inputName = props.name.toLowerCase();
     const inputCity = props.city.toLowerCase();
