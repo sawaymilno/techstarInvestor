@@ -19,7 +19,7 @@ const INITIAL_STATE = {
   country: '',
   status: '',
   tags: [],
-  formLoading: false,
+  formLoading: true,
   companies: [],
   newList: [] 
 };

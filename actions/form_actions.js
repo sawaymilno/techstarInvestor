@@ -12,8 +12,9 @@ import {
   LOADING_DATA
 } from './types';
 
-export const loadCompanyDatabase = (obj) => {
+export const loadCompanyDatabase = (obj, callback) => {
   console.log(obj, 'companydatabase in loadCompanyDatabase()');
+
   return ({ type: LOGIN_LOAD_COMPANIES, payload: obj });
 };
 

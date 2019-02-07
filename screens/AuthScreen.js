@@ -77,9 +77,10 @@ const styles = {
   }
 };
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, form }) => {
   const { email, password, error, authLoading } = auth;
-  return { email, password, error, authLoading };
+  const { formLoading } = form;
+  return { email, password, error, authLoading, formLoading };
 };
 
 export default connect(mapStateToProps, actions)(AuthScreen);
