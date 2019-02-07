@@ -21,7 +21,6 @@ class ReviewScreen extends Component {
           marginTop: Platform.OS === 'android' ? 24 : 0
         } 
   })
-  
 
   renderLikedJobs() {
     const newList = this.props.results.map(company => {
@@ -47,19 +46,19 @@ class ReviewScreen extends Component {
 
             <View style={styles.rowOneStyle}>
               <View style={styles.urlTextStyle}>
-                <Text>{`Website:`}</Text>
+                <Text>{'Website:'}</Text>
               </View>
               <View style={styles.urlStyle} >
-                <Text style={{color: '#03A9F4'}} onPress={() => Linking.openURL(url)}>{url}</Text>
+                <Text style={{ color: '#03A9F4' }} onPress={() => Linking.openURL(url)}>{url}</Text>
               </View>
             </View>
 
             <View style={styles.rowOneStyle}>
               <View style={styles.urlTextStyle}>
-                <Text>{`Crunchbase:`}</Text>
+                <Text>{'Crunchbase:'}</Text>
               </View>
               <View style={styles.urlStyle} >
-                <Text style={{color: '#03A9F4'}} onPress={() => Linking.openURL(crunchbase_url)}>{crunchbase_url}</Text>
+                <Text style={{ color: '#03A9F4' }} onPress={() => Linking.openURL(crunchbase_url)}>{crunchbase_url}</Text>
               </View>
             </View>
 
@@ -69,19 +68,20 @@ class ReviewScreen extends Component {
                 <Tags
                     initialTags={sortedTags}
                     readonly={true}
-                  />
+                />
               </View>
               <View style={styles.descriptionStyle}>
-                <Text style={{marginLeft: 5, marginRight: 5}}>{description}</Text> 
+                <Text style={{ marginLeft: 5, marginRight: 5 }}>{description}</Text> 
               </View>
             </View>
 
             <View style={styles.logoStyle}>
               <Image
                 style={{
-                  height: 300, width: 300,  
+                  height: 300, 
+                  width: 300,  
                   marginTop: 5,
-                  marginBottom: 5}}
+                  marginBottom: 5 }}
                 source={{ uri: company.logo_url }}
               />
             </View>
@@ -95,7 +95,7 @@ class ReviewScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={{backgroundColor: '#6D91A3'}}>
+      <ScrollView style={{ backgroundColor: '#6D91A3' }}>
         {this.renderLikedJobs()}
       </ScrollView>
     );
@@ -106,8 +106,10 @@ class ReviewScreen extends Component {
 const styles = {
   canvas: {
     position: 'absolute', 
-    top: 5, left: 5, 
-    bottom: 5, right: 5
+    top: 5, 
+    left: 5, 
+    bottom: 5, 
+    right: 5
   },
   cardStyle: {
     flex: 1

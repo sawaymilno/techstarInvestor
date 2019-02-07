@@ -1,10 +1,5 @@
-// import _ from 'lodash';
-// import firebase from 'firebase';
 import React, { Component } from 'react';
-// import { View, Text, AsyncStorage } from 'react-native';
-// import { AppLoading } from 'expo';
 import Slides from '../components/Slides';
-// import tsLogoPrimary from '../assets';
 
 const SLIDE_DATA = [
   { text: 'welcome to techstars investor', color: '#2A3842', image: require('../assets/tsLogo_Primary.png'), textColor: '#6D91A3' },
@@ -13,40 +8,12 @@ const SLIDE_DATA = [
 ];
 
 class WelcomeScreen extends Component {
-  state = { token: null }
   
-  // componentWillMount() {
-  //   const config = {
-  //     apiKey: 'AIzaSyAFN50pZDzZdo4pw561Q_ZCeO7M_q9P2w4',
-  //     authDomain: 'techstarinvestors-a26a9.firebaseapp.com',
-  //     databaseURL: 'https://techstarinvestors-a26a9.firebaseio.com',
-  //     projectId: 'techstarinvestors-a26a9',
-  //     storageBucket: 'techstarinvestors-a26a9.appspot.com',
-  //     messagingSenderId: '474773388634'
-  //   };
-  //   firebase.initializeApp(config);
-  // }
-
-  // async componentWillMount() {
-  //   let token = await AsyncStorage.getItem('fb_token');
-
-  //   if (token) {
-  //     this.props.navigation.navigate('form');
-  //     this.setState({ token });
-  //   } else {
-  //     this.setState({ token: false });
-  //   }
-  // }
-
   onSlidesComplete = async () => {
     this.props.navigation.navigate('auth');
   }
 
   render() {
-    // if (_.isNull(this.state.token)) {
-    //   return <AppLoading />;
-    // }
-
     return (
       <Slides 
       data={SLIDE_DATA} 

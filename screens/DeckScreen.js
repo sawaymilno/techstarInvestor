@@ -7,7 +7,6 @@ import { Header, Button, CustomCard, CardSection, Result } from '../components/c
 import * as actions from '../actions';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const SCREEN_WIDTH = Dimensions.get('window').width;
 
 class DeckScreen extends Component {
   static navigationOptions = {
@@ -16,8 +15,8 @@ class DeckScreen extends Component {
   }
 
   clearTheForm = () => {
-    this.props.clearForm()
-    this.props.navigation.navigate('form')
+    this.props.clearForm();
+    this.props.navigation.navigate('form');
   }
 
   renderCard(company) {
@@ -71,7 +70,7 @@ class DeckScreen extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#6D91A3', height: SCREEN_HEIGHT}}>
+      <View style={{ backgroundColor: '#6D91A3', height: SCREEN_HEIGHT }}>
         <Header />
         <View style={{ marginTop: 10 }}>
           <Swipe
@@ -93,7 +92,7 @@ const styles = {
     position: 'absolute', top: 5, left: 5, bottom: 5, right: 5
   },
   cardStyle: {
-    height: SCREEN_HEIGHT*.6,
+    height: SCREEN_HEIGHT * 0.6,
   },
   rowOneStyle: {
     flexDirection: 'row',

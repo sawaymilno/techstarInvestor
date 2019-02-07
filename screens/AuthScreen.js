@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import firebase from 'firebase';
-import { View, Text, Dimensions, AsyncStorage } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { CustomCard, CardSection, Input, Button, Spinner, Header } from '../components/common';
 import * as actions from '../actions';
@@ -10,27 +9,6 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 
 class AuthScreen extends Component {
-  // componentDidMount() {
-  //   const config = {
-  //     apiKey: 'AIzaSyAFN50pZDzZdo4pw561Q_ZCeO7M_q9P2w4',
-  //     authDomain: 'techstarinvestors-a26a9.firebaseapp.com',
-  //     databaseURL: 'https://techstarinvestors-a26a9.firebaseio.com',
-  //     projectId: 'techstarinvestors-a26a9',
-  //     storageBucket: 'techstarinvestors-a26a9.appspot.com',
-  //     messagingSenderId: '474773388634'
-  //   };
-  //   firebase.initializeApp(config);
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.onAuthComplete(nextProps);
-  // }
-
-  // onAuthComplete(props) {
-  //   if (props.token) {
-  //     this.props.navigation.navigate('form');
-  //   }
-  // }
 
   onEmailChange = (text) => this.props.emailChanged(text);
   onPasswordChange = (text) => this.props.passwordChanged(text);

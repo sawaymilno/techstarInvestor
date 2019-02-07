@@ -19,12 +19,12 @@ export const loadCompanyDatabase = (obj) => {
 
 export const nameChanged = (text) => ({ type: FILTER_NAME, payload: text });
 export const cityChanged = (text) => ({ type: FILTER_CITY, payload: text });
-export const stateChanged = (text) => ({ type: FILTER_STATE, payload: text })
-export const countryChanged = (text) => ({ type: FILTER_COUNTRY, payload: text })
+export const stateChanged = (text) => ({ type: FILTER_STATE, payload: text });
+export const countryChanged = (text) => ({ type: FILTER_COUNTRY, payload: text });
 export const statusChanged = (text) => ({ type: FILTER_STATUS, payload: text });
 export const loadingChanged = (value) => ({ type: LOADING_DATA, payload: value });
-export const tagChanged = (tag) => ({type: FILTER_TAG, payload: tag });
+export const tagChanged = (tag) => ({ type: FILTER_TAG, payload: tag });
 
-export const clearForm = () => ({ type: CLEAR_FORM })
+export const clearForm = () => ({ type: CLEAR_FORM });
 export const likeCompany = (company) => ({ type: LIKE_COMPANY, payload: company });
 export const clearLikedCompanies = () => ({ type: CLEAR_LIKED_COMPANIES });

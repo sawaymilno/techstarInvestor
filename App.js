@@ -1,6 +1,5 @@
-// import { Notifications } from 'expo';
 import React from 'react';
-import { /*StyleSheet, Alert*/ Image } from 'react-native';
+import { Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { 
   createBottomTabNavigator, 
@@ -10,7 +9,6 @@ import {
 import { Provider } from 'react-redux';
 
 import firebase from 'firebase';
-// import registerForNotifications from './services/push_notifications';
 import store from './store';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -20,20 +18,6 @@ import SettingsScreen from './screens/SettingsScreen';
 import ReviewScreen from './screens/ReviewScreen';
 
 export default class App extends React.Component {
-  // componentDidMount() {
-  //   registerForNotifications();
-  //   Notifications.addListener(notification => {
-  //     const { data: { text }, origin } = notification;
-
-  //     if (origin === 'received' && text) {
-  //       Alert.alert(
-  //         'New Push Notification',
-  //         text,
-  //         [{ text: 'Ok' }]
-  //       );
-  //     }
-  //   });
-  // }
 
   componentDidMount() {
     const config = {
@@ -56,7 +40,6 @@ export default class App extends React.Component {
         activeTintColor: '#2A3842',
         inactiveTintColor: 'white',
         activeBackgroundColor: '#0B9841',
-        // inactiveBackgroundColor: ''
         style: {
           backgroundColor: '#0DB14B'
         }
@@ -78,15 +61,11 @@ export default class App extends React.Component {
       headerStyle: {
         backgroundColor: '#0DB14B',
         headerTintColor: 'white',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         height: 46,
-        // paddingTop: 25,
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
         elevation: 2,
-        // position: 'relative',
       }
     };
     
@@ -104,7 +83,6 @@ export default class App extends React.Component {
       {
         navigationOptions: {
           headerStyle: styles.container,
-          // title: 'Review Jobs',
           tabBarIcon: ({ tintColor }) => <Icon name="favorite" size={30} color={tintColor} />
         },
         cardStyle: {
@@ -134,8 +112,6 @@ export default class App extends React.Component {
     );
   
     const Navigator = createAppContainer(createBottomTabNavigator({
-      //change welcome to WelcomeScreen after testing
-      // welcome: FormScreen,
       welcome: {
         screen: WelcomeScreen,
         navigationOptions: Options

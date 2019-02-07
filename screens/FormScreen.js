@@ -37,7 +37,7 @@ class FormScreen extends Component {
   onStatusChange = (text) => this.props.statusChanged(text);
   onStateChange = (text) => this.props.stateChanged(text);
   onCountryChange = (text) => this.props.countryChanged(text);
-  onTagChange = (i,tag) => this.props.tagChanged(tag);
+  onTagChange = (i, tag) => this.props.tagChanged(tag);
 
   onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
@@ -64,6 +64,8 @@ class FormScreen extends Component {
     }
 
     tagResults = tagResults.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+    console.log(tagResults, 'tagresults');
 
     return (
       <View style={{ backgroundColor: '#6D91A3', height: SCREEN_HEIGHT * 0.95 }}>
@@ -129,11 +131,11 @@ class FormScreen extends Component {
 
               <CustomCard>
                 <CardSection>
-                  <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={{flex:1, justifyContent: 'center'}}>
-                      <Text style={{fontSize: 18, paddingLeft: 20}}>Tags</Text>
+                  <View style={{ flex: 1, flexDirection: 'row' }}>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                      <Text style={{ fontSize: 18, paddingLeft: 20 }}>Tags</Text>
                     </View>
-                      <View style={{flex:3}}>
+                      <View style={{ flex: 3 }}>
                         <Tags
                           readonly={true}
                           initialTags={this.props.tags}
@@ -145,13 +147,13 @@ class FormScreen extends Component {
 
               <Modal visible={this.state.visible}>
                 <ScrollView>
-                  <Card containerStyle={{backgroundColor: '#0DB14B'}}>
+                  <Card containerStyle={{ backgroundColor: '#0DB14B' }}>
 
                     <CardSection>
                       <Tags
                           initialTags={tagResults}
                           onTagPress={(i, label) => this.onTagChange(i, label)}
-                        />
+                      />
                     </CardSection>
 
                     <CardSection>
