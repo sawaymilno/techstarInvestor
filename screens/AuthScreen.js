@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { View, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import { Database } from 'react-native-dotenv';
 import { CustomCard, CardSection, Input, Button, Spinner, Header } from '../components/common';
 import * as actions from '../actions';
 
@@ -15,7 +16,7 @@ class AuthScreen extends Component {
   onButtonPress = async () => {
     const { email, password } = this.props;
     this.props.loginUser({ email, password }, this.props.navigation.navigate);
-    const { data } = await axios.get('https://data.techstars.com/v2/companies');
+    const { data } = await axios.get(Database);
     this.props.loadCompanyDatabase(data.items);
   }
 
